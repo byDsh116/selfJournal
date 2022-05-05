@@ -1,22 +1,53 @@
 .button{
     background-color: rgb(162 158 191);
-    width: 155px;
-    height: 42px;
     border-radius: 40px;
     border: 2px solid black;
     font-size: 19px;
     cursor: pointer;
+    width: 155px;
+    height: 42px;
 }
 
 .submit {
     margin-top: -15px;
     align-self: center;
-   
+}
+
+.delete {
+    background-color: inherit;
+    align-self: flex-end;
+    width: 48px;
+    height: 42px;
+    border: none;
+    cursor: pointer;
+}
+
+.editDiv{
+    display: flex;
+    flex-direction: row-reverse;
+    /* align-content: baseline; */
+    height: 20px;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
 
 }
 
-.button .delete {
-    background-color: aqua;
+.editBtn {
+    width: 36px;
+    height: 50px;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+
+}
+
+.deleteDiv {
+    background-color: inherit;
+    height: 90%;
+    display: flex;
+    justify-content: flex-end;
+
 }
 
 .noteInput{
@@ -40,6 +71,7 @@
 
 
 .notes {
+    
     width: 50%;
     height: 20%;
     padding: 15px;
@@ -49,8 +81,9 @@
     box-shadow: 4px 4px 10px rgb(0 0 0 / 6%);
     border: 2px solid #302d3a;
     text-align: center;
-    background-color: rgb(212, 212, 239);
+    background-color: rgb(221 221 238);
     overflow: scroll;
+    opacity: 0.8;
 }
 
 .inputDiv{
@@ -59,4 +92,18 @@
     align-self: normal;
     flex-direction: column;
     display: flex;
+}
+
+.opened {
+    width: 70%;
+    height: 40%;
+    padding: 15px;
+    margin: 20px;
+    border-radius: 15px;
+    border: 0;
+    box-shadow: 4px 4px 10px rgb(0 0 0 / 6%);
+    border: 2px solid #302d3a;
+    text-align: center;
+    background-color: rgb(221 221 238);
+    overflow: scroll;
 }

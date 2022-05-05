@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import React from "react";
 import style from "../styles/styles.module.css";
 // import { Button } from './Button'
@@ -17,6 +18,7 @@ export class InputGroup extends React.Component {
     const noteObject = {
       inputTitle: this.state.inputTitle,
       inputText: this.state.inputText,
+      id: nanoid(),
     };
     this.props.onChange(noteObject);
   };
@@ -33,15 +35,15 @@ export class InputGroup extends React.Component {
             this.setState({ inputTitle: e.target.value });
           }}
         />
-
         <input
           className={style.noteInput}
           type="text"
           placeholder="add your thought"
           onChange={(e) => {
-            this.setState({ inputText: e.target.value });
-          }}
+              this.setState({ inputText: e.target.value });
+            }}
         />
+         
         <button
           className={`${style.button} ${style.submit}`}
           onClick={this.onClick}
