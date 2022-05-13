@@ -2,7 +2,11 @@ import "./App.css";
 import style from "./styles/styles.module.css";
 import React from "react";
 import { InputGroup } from "./components/InputGroup";
-// import { Button } from './components/Button';
+
+const current = new Date();
+const date = `${current.getDate()}/${
+  current.getMonth() + 1
+}/${current.getFullYear()}`;
 
 class App extends React.Component {
   state = {
@@ -82,6 +86,9 @@ class App extends React.Component {
                 <div className={style.editDiv}>
                   <button className={style.editBtn}>{this.editBtn}</button>
                   <strong style={{ marginLeft: "30px" }}>
+                    <div style={{ marginBottom: "5px" }}>
+                      <span> {date} </span>
+                    </div>
                     {note.inputTitle}
                   </strong>
                 </div>
