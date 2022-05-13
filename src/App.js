@@ -11,7 +11,10 @@ const date = `${current.getDate()}/${
 class App extends React.Component {
   state = {
     notes: [],
+    modalActive: false,
+    currentNote: null,
   };
+
   updateParentComponentState = (value) => {
     this.setState({
       notes: [...this.state.notes, value],
@@ -30,7 +33,6 @@ class App extends React.Component {
       notes: arr,
     });
   }
-
   // editPost(id){
   //   this.notes.id == id
   // }
