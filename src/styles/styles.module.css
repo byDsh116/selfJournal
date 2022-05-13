@@ -94,9 +94,22 @@
     display: flex;
 }
 
-.opened {
+.modal {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0);
+  }
+  
+  .modalActive {
     width: 70%;
-    height: 40%;
+    height: 70%;
     padding: 15px;
     margin: 20px;
     border-radius: 15px;
@@ -104,6 +117,12 @@
     box-shadow: 4px 4px 10px rgb(0 0 0 / 6%);
     border: 2px solid #302d3a;
     text-align: center;
-    background-color: rgb(221 221 238);
+    background-color: rgb(215 215 232);
     overflow: scroll;
-}
+    position: absolute;
+    z-index: 2;
+  }
+  
+  .hiddenModal {
+    visibility: hidden;
+  }

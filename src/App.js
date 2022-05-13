@@ -33,14 +33,13 @@ class App extends React.Component {
       notes: arr,
     });
   }
-  // editPost(id){
-  //   this.notes.id == id
-  // }
-
-  // openPost(id){
-  //   className=opened
-
-  // }
+  
+  openPost(note) {
+    this.setState({
+      madalActive: true,
+      openedPost: note,
+    });
+  }
 
   trashIcon = (
     <svg
@@ -80,13 +79,50 @@ class App extends React.Component {
     return (
       <div className="App">
         <InputGroup onChange={this.updateParentComponentState} />
+        <div
+          className={` ${
+            this.state.modalActive ? style.modalActive : style.hiddenModal
+          }`}
+        >
+        <div
+            className={style.modalContent}
+            // onClick={(e) => e.stopPropagation()}
+          >
+        <strong style={{ marginLeft: "30px" }}>
+                    {/* <div style={{ marginBottom: "5px" }}> */}
+                      <span> {date} </span>
+                    {/* </div> */}
+                    <br/>
+                    {this.state.currentNote?.inputTitle}
+                  </strong>
+                  <hr style={{ backgroundColor: "#b7b1c9", height: "2px" }} />
+                <span>{this.state.currentNote?.inputText}</span>
+                <div className={style.deleteDiv}>
+                  <button
+                    className={style.delete}
+                    onClick={() => this.deletePost(this.state.currentNote?.id) }
+                  >
+                    {this.trashIcon}
+                  </button>
+                </div>
+          </div>
+        </div>
 
         <div className={style.notesBox}>
           {this.state.notes.map((note, id) => {
             return (
-              <div key={note.id} className={style.notes}>
+              <div
+                key={note.id}
+                id={note.id}
+                className={style.notes}
+                modalActive={this.state.modalActive}
+                onClick={() => {
+                  this.openPost(note)
+                }}
+              >
                 <div className={style.editDiv}>
                   <button className={style.editBtn}>{this.editBtn}</button>
+
                   <strong style={{ marginLeft: "30px" }}>
                     <div style={{ marginBottom: "5px" }}>
                       <span> {date} </span>
@@ -95,8 +131,10 @@ class App extends React.Component {
                   </strong>
                 </div>
                 <br />
+
                 <hr style={{ backgroundColor: "#b7b1c9", height: "2px" }} />
                 <span>{note.inputText}</span>
+
                 <div className={style.deleteDiv}>
                   <button
                     className={style.delete}
