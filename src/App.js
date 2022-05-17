@@ -11,7 +11,7 @@ const date = `${current.getDate()}/${
 class App extends React.Component {
   state = {
     notes: [],
-    modalActive: false,
+    modalActive: true,
     currentNote: null,
   };
 
@@ -33,13 +33,21 @@ class App extends React.Component {
       notes: arr,
     });
   }
-  
+
   openPost(note) {
     this.setState({
-      madalActive: true,
-      openedPost: note,
+      modalActive: true,
+      currentNote: note,
     });
   }
+
+   hideModal = () => {
+    this.setState({
+      modalActive: false,
+    });
+  }
+
+  
 
   trashIcon = (
     <svg
@@ -84,40 +92,62 @@ class App extends React.Component {
             this.state.modalActive ? style.modalActive : style.hiddenModal
           }`}
         >
-        <div
-            className={style.modalContent}
-            // onClick={(e) => e.stopPropagation()}
-          >
-        <strong style={{ marginLeft: "30px" }}>
-                    {/* <div style={{ marginBottom: "5px" }}> */}
-                      <span> {date} </span>
-                    {/* </div> */}
-                    <br/>
-                    {this.state.currentNote?.inputTitle}
-                  </strong>
-                  <hr style={{ backgroundColor: "#b7b1c9", height: "2px" }} />
-                <span>{this.state.currentNote?.inputText}</span>
-                <div className={style.deleteDiv}>
-                  <button
-                    className={style.delete}
-                    onClick={() => this.deletePost(this.state.currentNote?.id) }
-                  >
-                    {this.trashIcon}
-                  </button>
-                </div>
+          <div style={{maxWidth: 'inherit'}}>
+            <input
+            size='70'
+              name="title"
+              type="text"
+              value={this.state.currentNote?.inputTitle}
+              className={`${style.modalInput} ${style.modalInputTitle}`}
+              onChange={(e) => {
+                this.setState({ inputTitle: e.target.value });
+              }}
+              
+            />
+            <strong style={{ marginLeft: "30px" }}>
+              <span> {date} </span>
+              <br />
+            </strong>
+
+            <hr style={{ backgroundColor: "#b7b1c9", height: "2px" }} />
+            <input
+              className={`${style.modalInput} ${style.modalInputText}`}
+              type="text"
+              value={this.state.currentNote?.inputText}
+              onChange={(e) => {
+                this.setState({ inputText: e.target.value });
+              }}
+            />
+            <button
+              className={`${style.button} `}
+              onClick={this.updateParentComponentState}
+            >
+              Save
+            </button>
+            <button className={style.button} onClick={this.hideModal}>
+              X
+            </button>
+            <div className={style.deleteDiv}>
+              <button
+                className={style.delete}
+                onClick={() => this.deletePost(this.state.currentNote?.id)}
+              >
+                {this.trashIcon}
+              </button>
+            </div>
           </div>
         </div>
 
         <div className={style.notesBox}>
-          {this.state.notes.map((note, id) => {
+          {this.state.notes.map((note) => {
             return (
               <div
                 key={note.id}
                 id={note.id}
                 className={style.notes}
-                modalActive={this.state.modalActive}
+                currentNote={this.state.currentNote}
                 onClick={() => {
-                  this.openPost(note)
+                  this.openPost(note);
                 }}
               >
                 <div className={style.editDiv}>
