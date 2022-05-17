@@ -93,7 +93,7 @@ class App extends React.Component {
           }`}
         >
           <div style={{maxWidth: 'inherit'}}>
-            <input
+            <textarea
             size='70'
               name="title"
               type="text"
@@ -110,7 +110,7 @@ class App extends React.Component {
             </strong>
 
             <hr style={{ backgroundColor: "#b7b1c9", height: "2px" }} />
-            <input
+            <textarea
               className={`${style.modalInput} ${style.modalInputText}`}
               type="text"
               value={this.state.currentNote?.inputText}

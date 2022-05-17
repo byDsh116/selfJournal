@@ -29,6 +29,7 @@ export class InputGroup extends React.Component {
         <input
           name="title"
           type="text"
+          maxLength='90'
           placeholder="Add title"
           className={style.noteInput}
           onChange={(e) => {
