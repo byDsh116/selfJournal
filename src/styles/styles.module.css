@@ -22,7 +22,7 @@
   cursor: pointer;
 }
 
-.editDiv {
+.dateDiv {
   display: flex;
   flex-direction: row-reverse;
   /* align-content: baseline; */
@@ -30,15 +30,19 @@
   width: 100%;
   padding: 0px;
   margin: 0px;
+  
+  
 }
 
-.editBtn {
-  width: 36px;
-  height: 50px;
+.dateBtn {
+  width: 40px;
+  height: 55px;
   border: none;
   background-color: inherit;
   cursor: pointer;
+  align-self: center;
 }
+
 
 .deleteDiv {
   background-color: inherit;
@@ -123,7 +127,7 @@
 }
 
 .hiddenModal {
-  visibility: hidden;
+  display: none;
 }
 
 .modalInput {
@@ -143,4 +147,23 @@
 .modalInputText {
   height: 10%;
   max-height: fit-content;
+}
+
+.title{
+   
+    height: fit-content;
+}
+
+   .hintBtn:hover::after { 
+    content: attr(dt); /* Выводим текст */
+    position: absolute; /* Абсолютное позиционирование */
+    z-index: 1; /* Отображаем подсказку поверх других элементов */
+    background: #d7d7e8;
+    /* font-family: Arial, sans-serif; Гарнитура шрифта */
+    font-size: 16px; /* Размер текста подсказки */
+    padding: 5px 10px; /* Поля */
+    border: 1px solid #333; /* Параметры рамки */
+    margin: 3px;
+border-radius: 5px;
+font-weight: 400;   
 }

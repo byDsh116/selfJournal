@@ -11,7 +11,7 @@ const date = `${current.getDate()}/${
 class App extends React.Component {
   state = {
     notes: [],
-    modalActive: true,
+    modalActive: false,
     currentNote: null,
   };
 
@@ -41,13 +41,11 @@ class App extends React.Component {
     });
   }
 
-   hideModal = () => {
+  hideModal = () => {
     this.setState({
       modalActive: false,
     });
-  }
-
-  
+  };
 
   trashIcon = (
     <svg
@@ -66,21 +64,11 @@ class App extends React.Component {
     </svg>
   );
 
-  editBtn = (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="16"
-      height="16"
-      fill="currentColor"
-      class="bi bi-pencil-square"
-      viewBox="0 0 16 16"
-    >
-      <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-      <path
-        fill-rule="evenodd"
-        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
-      />
-    </svg>
+  noteDate = (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+    <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+    <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+  </svg>
   );
 
   render() {
@@ -92,9 +80,9 @@ class App extends React.Component {
             this.state.modalActive ? style.modalActive : style.hiddenModal
           }`}
         >
-          <div style={{maxWidth: 'inherit'}}>
+          <div style={{ maxWidth: "inherit" }}>
             <textarea
-            size='70'
+              size="70"
               name="title"
               type="text"
               value={this.state.currentNote?.inputTitle}
@@ -102,14 +90,20 @@ class App extends React.Component {
               onChange={(e) => {
                 this.setState({ inputTitle: e.target.value });
               }}
-              
             />
             <strong style={{ marginLeft: "30px" }}>
               <span> {date} </span>
               <br />
             </strong>
+            <br />
 
-            <hr style={{ backgroundColor: "#b7b1c9", height: "2px" }} />
+            <hr
+              style={{
+                backgroundColor: "#b7b1c9",
+                height: "2px",
+                marginTop: "33px",
+              }}
+            />
             <textarea
               className={`${style.modalInput} ${style.modalInputText}`}
               type="text"
@@ -120,7 +114,9 @@ class App extends React.Component {
             />
             <button
               className={`${style.button} `}
-              onClick={this.updateParentComponentState}
+              onClick={() =>
+                this.updateParentComponentState(this.state.currentNote?.id)
+              }
             >
               Save
             </button>
@@ -150,18 +146,19 @@ class App extends React.Component {
                   this.openPost(note);
                 }}
               >
-                <div className={style.editDiv}>
-                  <button className={style.editBtn}>{this.editBtn}</button>
-
-                  <strong style={{ marginLeft: "30px" }}>
-                    <div style={{ marginBottom: "5px" }}>
-                      <span> {date} </span>
-                    </div>
-                    {note.inputTitle}
-                  </strong>
+                <div className={style.title}>
+                  <div className={style.dateDiv}>
+                    <button className={`${style.dateBtn} ${style.hintBtn}`} dt={date}>{this.noteDate}</button>
+                    <strong style={{ marginLeft: "30px" }}>
+                      {/* <div style={{ marginBottom: "5px" }}>
+                        <span> {date} </span>
+                        
+                      </div> */}
+                      {note.inputTitle}
+                    </strong>
+                  </div>
+                  <br />
                 </div>
-                <br />
-
                 <hr style={{ backgroundColor: "#b7b1c9", height: "2px" }} />
                 <span>{note.inputText}</span>
 
