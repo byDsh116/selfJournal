@@ -52,7 +52,7 @@
 }
 
 .noteInput {
-  width: 45%;
+  width: 40%;
   height: 2%;
   padding: 15px;
   border-radius: 15px;
@@ -112,7 +112,7 @@
 .modalActive {
   width: 70%;
   height: 70%;
-  /* padding: 15px; */
+  padding: 15px;
   margin: 20px;
   border-radius: 15px;
   border: 0;
@@ -166,4 +166,12 @@
     margin: 3px;
 border-radius: 5px;
 font-weight: 400;   
+}
+
+.modalTitleDiv{
+    background-color: inherit;
+    width: inherit;
+    width: inherit;
+    height: 15%;
+    display: inline;
 }
