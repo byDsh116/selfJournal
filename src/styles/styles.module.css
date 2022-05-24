@@ -175,3 +175,15 @@ font-weight: 400;
     height: 15%;
     display: inline;
 }
+
+[contentEditable=true]:focus{
+	border:none;
+  outline:none;
+}
+
+.modalTextDiv{
+    height: fit-content;
+    background: inherit;
+    padding-top: inherit;
+    padding-bottom: 25px;
+}
