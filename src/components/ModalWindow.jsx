@@ -11,15 +11,17 @@ export class ModalWindow extends React.Component {
         return (
             <div
             className={` ${
-              this.props.isModalActive ? style.modalActive : style.hiddenModal
+              style.modalActive
             }`}
           >
             <div style={{ maxWidth: "inherit",    paddingTop: '20px'}}>
               <textarea
+              maxlength="60"
                 className={style.modalTitleDiv}
-                contenteditable="true"
+                contentEditable="true"
                 defaultValue={this.props.currentNote?.inputTitle}
                 onChange={(e) => {
+                    e.stopPropagation()
                     console.log(e.target.value)
                   this.setState({ title: e.target.value });
                 }}
@@ -36,39 +38,45 @@ export class ModalWindow extends React.Component {
               />
               <textarea
               className={style.modalTextDiv}
-                contenteditable="true"
+                contentEditable="true"
                 defaultValue={this.props.currentNote?.inputText}
             
                 onChange={(e) => {
+                    e.stopPropagation()
                     console.log(e.target.value)
                   this.setState({ body: e.target.value });
                 }}
               >
-                {this.props.currentNote?.inputText}
               </textarea>
               <br />
   {/* ........................................................ */}
               <button
                 className={`${style.button} `}
                 key={this.currentNote?.id}
-                onClick={() =>
+                onClick={(e) => {
+                    e.stopPropagation()
                   this.props.editNote(this.props.currentNote?.id, this.state.body, this.state.title)
+                }
                 }
               >
                 Save
               </button>
    {/* ....................................................... */}
-              <button className={style.button} onClick={this.props.hideModal}>
+              <button className={style.button} onClick={(e) => {
+                  console.log(e)
+                  e.stopPropagation()
+                  this.props.hideModal()
+                }}>
                 X
               </button>
-              <div className={style.deleteDiv}>
+              {/* <div className={style.deleteDiv}>
                 <button
                   className={style.delete}
                   onClick={() => this.props.deletePost(this.state.currentNote?.id)}
                 >
                   {this.trashIcon}
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         )
