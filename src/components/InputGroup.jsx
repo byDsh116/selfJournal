@@ -39,6 +39,7 @@ export class InputGroup extends React.Component {
         <input
           className={style.noteInput}
           type="text"
+          // contenteditable='true'
           placeholder="add your thought"
           onChange={(e) => {
               this.setState({ inputText: e.target.value });

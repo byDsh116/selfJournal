@@ -59,7 +59,10 @@
   border: 2px solid #302d3a;
   text-align: center;
   margin: 20px;
+  box-shadow: 3px 3px #353140;
+  
 }
+input {outline:none;}
 
 .notesBox {
   width: 100%;

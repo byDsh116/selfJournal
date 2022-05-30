@@ -17,7 +17,7 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    // document.addEventListener('click', this.handlePageClick);
+    document.addEventListener('click', this.handlePageClick);
     window.addEventListener('click', this.handlePageClick);
   }
 
@@ -110,11 +110,11 @@ class App extends React.Component {
       //////////////////////////////////////
       <div
         className="App"
-        // onClick={(e) => {
-        //   if (this.state.modalActive) {
-        //     this.setState({ modalActive: false })
-        //   }
-        // }}
+        onClick={(e) => {
+          if (this.state.modalActive) {
+            this.setState({ modalActive: false })
+          }
+        }}
       >
         {/* /////////////////////////////// */}
         <InputGroup onChange={this.updateParentComponentState} />
