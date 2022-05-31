@@ -13,6 +13,9 @@ export class ModalWindow extends React.Component {
             className={` ${
               style.modalActive
             }`}
+            onClick={(e) =>{
+              e.stopPropagation()
+            }}
           >
             <div style={{ maxWidth: "inherit",    paddingTop: '20px'}}>
               <textarea

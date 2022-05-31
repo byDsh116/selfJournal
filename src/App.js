@@ -17,12 +17,12 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    document.addEventListener('click', this.handlePageClick);
-    window.addEventListener('click', this.handlePageClick);
+    document.addEventListener("click", this.handlePageClick);
+    window.addEventListener("click", this.handlePageClick);
   }
 
-  handlePageClick(e){
-    e.stopPropagation()
+  handlePageClick(e) {
+    e.stopPropagation();
   }
 
   updateParentComponentState = (value) => {
@@ -112,22 +112,22 @@ class App extends React.Component {
         className="App"
         onClick={(e) => {
           if (this.state.modalActive) {
-            this.setState({ modalActive: false })
+            this.setState({ modalActive: false });
           }
         }}
       >
         {/* /////////////////////////////// */}
         <InputGroup onChange={this.updateParentComponentState} />
-        {this.state.modalActive &&
-        <ModalWindow
-          isModalActive={this.state.modalActive}
-          currentNote={this.state.currentNote}
-          editNote={(id, title, body) => this.editNote(id, title, body)}
-          hideModal={() => {
-            this.setState({ modalActive: false });
-          }}
-        />
-        }
+        {this.state.modalActive && (
+          <ModalWindow
+            isModalActive={this.state.modalActive}
+            currentNote={this.state.currentNote}
+            editNote={(id, title, body) => this.editNote(id, title, body)}
+            hideModal={() => {
+              this.setState({ modalActive: false });
+            }}
+          />
+        )}
         <div className={style.notesBox}>
           {this.state.notes.map((note) => {
             console.log(note, this.state.notes);
@@ -157,18 +157,19 @@ class App extends React.Component {
                 </div>
                 <hr style={{ backgroundColor: "#b7b1c9", height: "2px" }} />
                 <span>{note.inputText}</span>
-
+                {/* _________________DELETE BLOCK_____________________________ */}
                 <div className={style.deleteDiv}>
                   <button
                     className={style.delete}
                     onClick={(e) => {
                       e.stopPropagation();
-                      this.deletePost(note.id)
+                      this.deletePost(note.id);
                     }}
                   >
                     {this.trashIcon}
                   </button>
                 </div>
+                {/* _________________DELETE BLOCK_____________________________ */}
               </div>
             );
           })}
