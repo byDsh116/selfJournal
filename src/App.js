@@ -3,27 +3,18 @@ import style from "./styles/styles.module.css";
 import React from "react";
 import { InputGroup } from "./components/InputGroup";
 import { ModalWindow } from "./components/ModalWindow";
-
-const current = new Date();
-const date = `${current.getDate()}/${
-  current.getMonth() + 1
-}/${current.getFullYear()}`;
+import { ConfirmationModal } from "./components/ConfirmationModal";
 
 class App extends React.Component {
+  date = `${new Date().getDate()}/${
+    new Date().getMonth() + 1
+  }/${new Date().getFullYear()}`;
   state = {
     notes: [],
     modalActive: false,
     currentNote: null,
+    isConfirmationModalOpen: false,
   };
-
-  componentDidMount() {
-    document.addEventListener("click", this.handlePageClick);
-    window.addEventListener("click", this.handlePageClick);
-  }
-
-  handlePageClick(e) {
-    e.stopPropagation();
-  }
 
   updateParentComponentState = (value) => {
     this.setState({
@@ -42,6 +33,10 @@ class App extends React.Component {
     this.setState({
       notes: arr,
     });
+  }
+
+  openConfirmationModal() {
+    this.setState({ isConfirmationModalOpen: true });
   }
 
   openPost(note) {
@@ -110,7 +105,7 @@ class App extends React.Component {
       //////////////////////////////////////
       <div
         className="App"
-        onClick={(e) => {
+        onClick={() => {
           if (this.state.modalActive) {
             this.setState({ modalActive: false });
           }
@@ -118,6 +113,12 @@ class App extends React.Component {
       >
         {/* /////////////////////////////// */}
         <InputGroup onChange={this.updateParentComponentState} />
+        {this.state.isConfirmationModalOpen && (
+          <ConfirmationModal
+            closeModal={() => this.setState({ isConfirmationModalOpen: false })}
+            deletePost={() => this.deletePost()}
+          />
+        )}
         {this.state.modalActive && (
           <ModalWindow
             isModalActive={this.state.modalActive}
@@ -145,7 +146,7 @@ class App extends React.Component {
                   <div className={style.dateDiv}>
                     <button
                       className={`${style.dateBtn} ${style.hintBtn}`}
-                      dt={date}
+                      dt={this.date}
                     >
                       {this.noteDate}
                     </button>
@@ -163,7 +164,9 @@ class App extends React.Component {
                     className={style.delete}
                     onClick={(e) => {
                       e.stopPropagation();
-                      this.deletePost(note.id);
+                      this.openConfirmationModal();
+
+                      // this.deletePost(note.id);
                     }}
                   >
                     {this.trashIcon}
